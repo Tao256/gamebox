@@ -68,6 +68,8 @@
 				background-color: #f0f0f0;
 			}
 			
+			
+			
 			@media (max-width: 640px) {
 				.chess-piece {
 					font-size: 1.8rem;
@@ -77,15 +79,18 @@
 					flex-direction: column;
 					gap: 1rem;
 					width: 100%;
+					max-width: 640px;
+					margin: 0 auto;
 				}
 				.chess-board {
-					width: 100vw !important;
-					height: 100vw !important;
+					width: calc(100vw - 16px) !important;
+					height: calc(100vw - 16px) !important;
 				}
 				.game-info {
-					width: 100% !important;
-					flex: none;
 					margin-top: 1rem;
+					width: calc(100vw - 16px) !important; /* 与棋盘宽度一致 */
+					margin-left: auto;
+					margin-right: auto;
 				}
 				
 				.promotion-option { width: 50px; height: 50px; font-size: 2rem; }
@@ -119,6 +124,46 @@
 					font-size: 0.85rem;
 					padding: 4px 2px;
 				}
+				
+				/* 移动端棋盘坐标优化 */
+				.chess-board-with-coords {
+					width: 100%;
+					overflow: hidden;
+				}
+				
+				.grid.grid-cols-8.w-\[640px\].mb-1 {
+				  width: calc(100vw - 16px) !important;
+				  margin: 0 auto 4px;
+				}
+				
+				.flex.flex-col.mr-1 .coord-label {
+				    height: calc((100vw - 16px) / 8) !important; /* 与棋盘格子高度保持一致 */
+				    width: 16px;
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
+				  }
+				.chess-board-with-coords {
+				    display: flex;
+				    align-items: center;
+				    width: 100vw;
+				    padding: 0 8px; /* 左右内边距，确保坐标可见 */
+				    box-sizing: border-box;
+				  }
+				  
+				  /* 调整列坐标的对齐方式 */
+				  .grid.grid-cols-8.mb-1 {
+				    padding: 0 2px; /* 与棋盘容器内边距一致 */
+				    box-sizing: border-box;
+				  }
+				
+				
+				
+			}
+			@media (max-width: 360px) { /* 针对超小屏的额外优化 */
+			  .coord-label {
+			    font-size: 0.6rem !important;
+			  }
 			}
 			
 		</style>
